@@ -581,7 +581,8 @@ def creategame(id1, id2, player1, player2):
                        'attackround':0,
                        'defenceround':0,
                        'ready':0,
-                       'name':player1['pet']['name']
+                       'name':player1['pet']['name'],
+                       'hp':player1['pet']['hp']
                       },
                 'id2':{
                     'id':id2,
@@ -594,7 +595,8 @@ def creategame(id1, id2, player1, player2):
                     'attackround':0,
                     'defenceround':0,
                     'ready':0,
-                    'name':player2['pet']['name']
+                    'name':player2['pet']['name'],
+                    'hp':player2['pet']['hp']
                      }
             }
             
