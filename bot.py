@@ -328,7 +328,7 @@ def inline(call):
                 medit('Теперь выставьте количество защиты, которое хотите поставить в этом ходу. Текущая защита: 0', call.from_user.id, call.message.message_id, reply_markup=Keyboard)
                         
     else:
-        if call.data=='enddefence':
+        if call.data=='enddef':
           x=0
           for ids in play:
             if ids['id1']['id']==user:
@@ -338,6 +338,7 @@ def inline(call):
                 x=1
                 y=ids['id2']
           if x==1:
+            medit('Ожидайте других игроков...', call.from_user.id, call.message.message_id)
             try:
                 y['timer'].cancel()
             except:
