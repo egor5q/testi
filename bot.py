@@ -181,7 +181,7 @@ def name(m):
 
 @bot.message_handler(commands=['fight'])
 def fight(m):
-  if m.from_user.id==441399484 or m.from_user.id==314238081 or id==55888804:
+  if m.from_user.id==441399484 or m.from_user.id==314238081 or m.from_user.id==55888804:
     if m.chat.id>0:
       z=iduser.find_one({'id':m.from_user.id})
       if z!=None:
