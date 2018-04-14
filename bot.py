@@ -332,15 +332,17 @@ def inline(call):
             if ids['id1']['id']==user:
                 x=1
                 y=ids['id1']
+                z=ids['id2']
             if ids['id2']['id']==user:
                 x=1
                 y=ids['id2']
+                z=ids['id1']
           if x==1:
             y['defenceselect']=0
             medit('Ожидайте других игроков...', call.from_user.id, call.message.message_id)
             y['timer'].cancel()
             y['ready']=1
-            ready(ids)
+            ready(y, z)
 
 
             
@@ -423,10 +425,10 @@ def ready(ids, id2):
         endturn(ids)
 
 
-def noready(ids):
+def noready(ids, id2):
     ids['ready']=1
-    if 
-    endturn(game)
+    if ids['ready']==1 and id2['ready']==1:
+        endturn(ids)
                 
 
 def endturn(game):#############################################################  ENDTURN
