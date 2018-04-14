@@ -342,7 +342,7 @@ def inline(call):
             medit('Ожидайте других игроков...', call.from_user.id, call.message.message_id)
             y['timer'].cancel()
             y['ready']=1
-            ready(y, z)
+            ready(y, z, ids)
 
 
             
@@ -403,9 +403,9 @@ def xod(id1, id2, name1, name2, player1, player2):
                 ids['id1']['attackselect']=1
             if ids['id2']['id']==id2:
                 ids['id2']['attackselect']=1
-    t=threading.Timer(60, noready, args=[ids['id1'], ids['id2']])
+    t=threading.Timer(60, noready, args=[ids['id1'], ids['id2'], ids])
     t.start()
-    zz=threading.Timer(60, noready, args=[ids['id2'],ids['id1']])
+    zz=threading.Timer(60, noready, args=[ids['id2'],ids['id1'], ids])
     zz.start()
     ids['id1']['timer']=t
     ids['id2']['timer']=zz
@@ -419,16 +419,16 @@ def xod(id1, id2, name1, name2, player1, player2):
     msg2=bot.send_message(id2, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)
     
 
-def ready(ids, id2): 
+def ready(ids, id2, game): 
     ids['ready']=1
     if ids['ready']==1 and id2['ready']==1:
-        endturn(ids)
+        endturn(game)
 
 
-def noready(ids, id2):
+def noready(ids, id2, game):
     ids['ready']=1
     if ids['ready']==1 and id2['ready']==1:
-        endturn(ids)
+        endturn(game)
                 
 
 def endturn(game):#############################################################  ENDTURN
