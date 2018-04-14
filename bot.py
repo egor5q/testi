@@ -342,7 +342,8 @@ def inline(call):
                 y['timer'].cancel()
             except:
                 pass
-            ready(call.from_user.id)
+            y['ready']=1
+            ready(ids)
 
 
             
@@ -416,14 +417,9 @@ def xod(id1, id2, name1, name2, player1, player2):
     msg2=bot.send_message(id2, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)
     
 
-def ready(id):
-    for ids in play:
-            if ids['id1']['id']==id:
-                ids['id1']['ready']=1
-            if ids['id2']['id']==id:
-                ids['id2']['ready']=1
-            if ids['id1']['ready']==1 and ids['id2']['ready']==1:
-                endturn(ids)
+def ready(ids): 
+        if ids['id1']['ready']==1 and ids['id2']['ready']==1:
+            endturn(ids)
 
 
 def noready(game):
