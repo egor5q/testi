@@ -305,8 +305,7 @@ def inline(call):
             else:
                 bot.send_message(user, 'Нет!')
                     
-    elif defence==0:
-        if call.data=='endattack':
+    if call.data=='endattack':
           x=0
           for ids in play:
             if ids['id1']['id']==user:
@@ -327,8 +326,7 @@ def inline(call):
                 Keyboard.add(types.InlineKeyboardButton(text='Окончить выбор', callback_data='enddef'))
                 medit('Теперь выставьте количество защиты, которое хотите поставить в этом ходу. Текущая защита: 0', call.from_user.id, call.message.message_id, reply_markup=Keyboard)
                         
-    else:
-        if call.data=='enddef':
+    if call.data=='enddef':
           x=0
           for ids in play:
             if ids['id1']['id']==user:
@@ -338,6 +336,7 @@ def inline(call):
                 x=1
                 y=ids['id2']
           if x==1:
+            y['defenceselect']=0
             medit('Ожидайте других игроков...', call.from_user.id, call.message.message_id)
             try:
                 y['timer'].cancel()
