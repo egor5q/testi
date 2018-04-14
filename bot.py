@@ -401,9 +401,12 @@ def xod(id1, id2, name1, name2, player1, player2):
                 ids['id1']['attackselect']=1
             if ids['id2']['id']==id2:
                 ids['id2']['attackselect']=1
-    t=threading.Timer(60, noready, args=[ids])
+    t=threading.Timer(60, noready, args=[ids['id1'], ids['id2']])
     t.start()
-    ids['timer']=t
+    zz=threading.Timer(60, noready, args=[ids['id2'],ids['id1']])
+    zz.start()
+    ids['id1']['timer']=t
+    ids['id2']['timer']=zz
     Keyboard=types.InlineKeyboardMarkup()
     Keyboard.add(types.InlineKeyboardButton(text='+1', callback_data='atk+1'))
     Keyboard.add(types.InlineKeyboardButton(text='+2', callback_data='atk+2'))
@@ -414,12 +417,15 @@ def xod(id1, id2, name1, name2, player1, player2):
     msg2=bot.send_message(id2, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)
     
 
-def ready(ids): 
-        if ids['id1']['ready']==1 and ids['id2']['ready']==1:
-            endturn(ids)
+def ready(ids, id2): 
+    ids['ready']=1
+    if ids['ready']==1 and id2['ready']==1:
+        endturn(ids)
 
 
-def noready(game):
+def noready(ids):
+    ids['ready']=1
+    if 
     endturn(game)
                 
 
@@ -563,8 +569,8 @@ def chlenomer(message):
  
 def creategame(id1, id2, player1, player2):
             return{
-                'timer':None,
                 'id1':{'id':id1,
+                       'timer':None,
                        'attackselect':0,
                        'defenceselect':0,
                        'maxattack':player1['pet']['maxattack'],
@@ -578,6 +584,7 @@ def creategame(id1, id2, player1, player2):
                        'hp':player1['pet']['hp']
                       },
                 'id2':{
+                    'timer':None,
                     'id':id2,
                     'attackselect':0,
                     'defenceselect':0,
