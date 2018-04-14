@@ -181,7 +181,7 @@ def name(m):
 
 @bot.message_handler(commands=['fight'])
 def fight(m):
-  if m.from_user.id==441399484 or m.from_user.id==314238081:
+  if m.from_user.id==441399484 or m.from_user.id==314238081 or id==55888804:
     if m.chat.id>0:
       z=iduser.find_one({'id':m.from_user.id})
       if z!=None:
@@ -338,10 +338,7 @@ def inline(call):
           if x==1:
             y['defenceselect']=0
             medit('Ожидайте других игроков...', call.from_user.id, call.message.message_id)
-            try:
-                y['timer'].cancel()
-            except:
-                pass
+            y['timer'].cancel()
             y['ready']=1
             ready(ids)
 
