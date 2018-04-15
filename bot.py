@@ -53,7 +53,10 @@ def stats(m):
     try:
         percent=round((x['pet']['wons']/x['pet']['lose'])*100,0)
     except:
-        percent=100
+        if x['pet']['wons']!=0:
+            percent=100
+        else:
+            percent=0
     bot.send_message(m.chat.id, 'Победы: '+str(x['pet']['wons'])+'\nПоражения: '+str(x['pet']['lose'])+'\nВинрейт: '+str(percent)+'%')
             
             
