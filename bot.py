@@ -370,6 +370,8 @@ def gofight(id1, id2, name1, name2):
     
     
 def xod(id1, id2, name1, name2, player1, player2):
+    player1=iduser.find_one({'id':id1})
+    player2=iduser.find_one({'id':id2})
     if player1['pet']['skill']==None:
         skill1='Отсутствует'
     else:
