@@ -47,6 +47,14 @@ def sendmes(message):
                 pass
 
 
+@bot.message_handler(commands=['stats'])
+def stats(m):
+    x=iduser.find_one({'id':m.from_user.id})
+    bot.send_message(m.chat.id, 'Победы: '+str(x['pet']['wons'])+'\nПоражения: '+str(x['pet']['lose'])+'\nВинрейт: '+str(round(x['pet']['wons']/x['pet']['lose'],0))+'%')
+            
+            
+            
+            
 @bot.message_handler(commands=['elita']) 
 def elit(m):
     if m.from_user.id in elita:
@@ -501,16 +509,20 @@ def endturn(game):############################################################# 
         bot.send_message(player2['id'], 'Победа питомца с именем '+player2['name']+'!')
         bot.send_message(441399484, 'Победа питомца с именем '+player2['name']+'!')
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.wons':1}})
+        iduser.update_one({'id':player1['id']}, {'$inc':{'pet.lose':1}})
         play.remove(game)
     elif player2['hp']<=0 and player1['hp']>0: 
         bot.send_message(player1['id'], 'Победа питомца с именем '+player1['name']+'!')
         bot.send_message(player2['id'], 'Победа питомца с именем '+player1['name']+'!')
         bot.send_message(441399484, 'Победа питомца с именем '+player1['name']+'!')
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.wons':1}})
+        iduser.update_one({'id':player2['id']}, {'$inc':{'pet.lose':1}})
         play.remove(game)
     elif player1['hp']<=0 and player2['hp']<=0:
         bot.send_message(player1['id'], 'Ничья! Оба питомца проиграли!')
         bot.send_message(player2['id'], 'Ничья! Оба питомца проиграли!')
+        iduser.update_one({'id':player2['id']}, {'$inc':{'pet.lose':1}})
+        iduser.update_one({'id':player1['id']}, {'$inc':{'pet.lose':1}})
         bot.send_message(441399484, 'Ничья! Оба питомца проиграли!')
         play.remove(game)
     else:
