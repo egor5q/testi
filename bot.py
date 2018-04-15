@@ -456,7 +456,31 @@ def endturn(game):############################################################# 
         
     bot.send_message(player1['id'], 'Результаты хода:\n\n'+text1+'\n'+text2)
     bot.send_message(player2['id'], 'Результаты хода:\n\n'+text1+'\n'+text2)
-        
+    player1['attackround']=0
+    player1['defenceround']=0
+    player1['ready']=0
+    player1['attack']+=player1['attackregen']
+    player1['defence']+=player1['defenceregen']
+    player2['attackround']=0
+    player2['defenceround']=0
+    player2['ready']=0
+    player2['attack']+=player2['attackregen']
+    player2['defence']+=player2['defenceregen']
+    
+    if player1['hp']<=0 and player2['hp']>0:
+        bot.send_message(player1['id'], 'Победа питомца с именем '+player2['name']+'!')
+        bot.send_message(player2['id'], 'Победа питомца с именем '+player2['name']+'!')
+        play.remove(game)
+    elif player2['hp']<=0 and player1['hp']>0: 
+        bot.send_message(player1['id'], 'Победа питомца с именем '+player1['name']+'!')
+        bot.send_message(player2['id'], 'Победа питомца с именем '+player1['name']+'!')
+        play.remove(game)
+    elif player1['hp']<=0 and player2['hp']<=0:
+        bot.send_message(player1['id'], 'Ничья! Оба питомца проиграли!')
+        bot.send_message(player2['id'], 'Ничья! Оба питомца проиграли!')
+        play.remove(game)
+    else:
+        xod(player1['id'], player2['id'], player1['name'], player2['name'], game['id1'], game['id2'])
         
         
 def noplayers(id):
@@ -583,7 +607,9 @@ def creategame(id1, id2, player1, player2):
                        'defenceround':0,
                        'ready':0,
                        'name':player1['pet']['name'],
-                       'hp':player1['pet']['hp']
+                       'hp':player1['pet']['hp'],
+                       'attackregen':player1['pet']['regenattack'],
+                       'defenceregen':player1['pet']['regendefence']
                       },
                 'id2':{
                     'timer':None,
@@ -598,7 +624,9 @@ def creategame(id1, id2, player1, player2):
                     'defenceround':0,
                     'ready':0,
                     'name':player2['pet']['name'],
-                    'hp':player2['pet']['hp']
+                    'hp':player2['pet']['hp'],
+                    'attackregen':player2['pet']['regenattack'],
+                    'defenceregen':player2['pet']['regendefence']
                      }
             }
             
