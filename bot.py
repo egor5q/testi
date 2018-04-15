@@ -636,7 +636,8 @@ def creategame(id1, id2, player1, player2):
                        'name':player1['pet']['name'],
                        'hp':player1['pet']['hp'],
                        'attackregen':player1['pet']['regenattack'],
-                       'defenceregen':player1['pet']['regendefence']
+                       'defenceregen':player1['pet']['regendefence'],
+                       'skill':player1['pet']['skill']
                       },
                 'id2':{
                     'timer':None,
@@ -653,7 +654,8 @@ def creategame(id1, id2, player1, player2):
                     'name':player2['pet']['name'],
                     'hp':player2['pet']['hp'],
                     'attackregen':player2['pet']['regenattack'],
-                    'defenceregen':player2['pet']['regendefence']
+                    'defenceregen':player2['pet']['regendefence'],
+                    'skill':player2['pet']['skill']
                      }
             }
             
