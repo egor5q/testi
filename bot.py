@@ -60,7 +60,7 @@ def elit(m):
 def upd(m):
   if m.from_user.id==441399484:
          try:
-            coll.update({'pet':{'$ne':None}}, {'$set':{'pet.lose':0}})
+            iduser.update_many({'pet':{'$ne':None}}, {'$set':{'pet.lose':0}})
 
          except:
             pass
