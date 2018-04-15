@@ -420,6 +420,20 @@ def xod(id1, id2, name1, name2, player1, player2):
                      '🔵Реген защиты: '+str(player2['defenceregen'])+'\n'+
                      '🔺Скилл: '+skill2       
                     )
+    bot.send_message(441399484 , 'Информация о вашем питомце:\n'+'❤️ХП: '+str(player1['pet']['hp'])+
+                     '\n⚔️Атака: '+str(player1['pet']['attack'])+'/'+str(player1['pet']['maxattack'])+'\n'+
+                     '⚡️Реген атаки: '+str(player1['pet']['regenattack'])+'\n'+
+                    '🛡Защита: '+str(player1['pet']['defence'])+'/'+str(player1['pet']['maxdefence'])+'\n'+
+                     '🔵Реген защиты: '+str(player1['pet']['regendefence'])+'\n'+
+                     '🔺Скилл: '+skill1       
+                    )
+    bot.send_message(441399484 , 'Информация о вашем питомце:\n'+'❤️ХП: '+str(player2['pet']['hp'])+
+                     '\n⚔️Атака: '+str(player2['pet']['attack'])+'/'+str(player2['pet']['maxattack'])+'\n'+
+                     '⚡️Реген атаки: '+str(player2['pet']['regenattack'])+'\n'+
+                    '🛡Защита: '+str(player2['pet']['defence'])+'/'+str(player2['pet']['maxdefence'])+'\n'+
+                     '🔵Реген защиты: '+str(player2['pet']['regendefence'])+'\n'+
+                     '🔺Скилл: '+skill2   
+                    )
     
   for ids in play:
             if ids['id1']['id']==id1:
