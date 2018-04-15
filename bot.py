@@ -370,8 +370,7 @@ def gofight(id1, id2, name1, name2):
     
     
 def xod(id1, id2, name1, name2, player1, player2):
-    player1=iduser.find_one({'id':id1})
-    player2=iduser.find_one({'id':id2})
+  try:
     if player1['pet']['skill']==None:
         skill1='Отсутствует'
     else:
@@ -396,7 +395,33 @@ def xod(id1, id2, name1, name2, player1, player2):
                      '🔵Реген защиты: '+str(player2['pet']['regendefence'])+'\n'+
                      '🔺Скилл: '+skill2       
                     )
-    for ids in play:
+  except:
+    if player1['skill']==None:
+        skill1='Отсутствует'
+    else:
+        skill1=player1['skill']
+        
+    if player2['skill']==None:
+        skill2='Отсутствует'
+    else:
+        skill2=player2['skill']
+    bot.send_message(id1, 'Информация о вашем питомце:\n'+'❤️ХП: '+str(player1['hp'])+
+                     '\n⚔️Атака: '+str(player1['attack'])+'/'+str(player1['maxattack'])+'\n'+
+                     '⚡️Реген атаки: '+str(player1['regenattack'])+'\n'+
+                    '🛡Защита: '+str(player1['defence'])+'/'+str(player1['maxdefence'])+'\n'+
+                     '🔵Реген защиты: '+str(player1['regendefence'])+'\n'+
+                     '🔺Скилл: '+skill1       
+                    )
+    
+    bot.send_message(id2, 'Информация о вашем питомце:\n'+'❤️ХП: '+str(player2['hp'])+
+                     '\n⚔️Атака: '+str(player2['attack'])+'/'+str(player2['maxattack'])+'\n'+
+                     '⚡️Реген атаки: '+str(player2['regenattack'])+'\n'+
+                    '🛡Защита: '+str(player2['defence'])+'/'+str(player2['maxdefence'])+'\n'+
+                     '🔵Реген защиты: '+str(player2['regendefence'])+'\n'+
+                     '🔺Скилл: '+skill2       
+                    )
+    
+  for ids in play:
             if ids['id1']['id']==id1:
                 ids['id1']['attackselect']=1
             if ids['id2']['id']==id1:
@@ -405,20 +430,20 @@ def xod(id1, id2, name1, name2, player1, player2):
                 ids['id1']['attackselect']=1
             if ids['id2']['id']==id2:
                 ids['id2']['attackselect']=1
-    t=threading.Timer(60, noready, args=[ids['id1'], ids['id2'], ids])
-    t.start()
-    zz=threading.Timer(60, noready, args=[ids['id2'],ids['id1'], ids])
-    zz.start()
-    ids['id1']['timer']=t
-    ids['id2']['timer']=zz
-    Keyboard=types.InlineKeyboardMarkup()
-    Keyboard.add(types.InlineKeyboardButton(text='+1', callback_data='atk+1'))
-    Keyboard.add(types.InlineKeyboardButton(text='+2', callback_data='atk+2'))
-    Keyboard.add(types.InlineKeyboardButton(text='+5', callback_data='atk+5'))
-    Keyboard.add(types.InlineKeyboardButton(text='+10', callback_data='atk+10'))
-    Keyboard.add(types.InlineKeyboardButton(text='Окончить выбор', callback_data='endattack'))
-    msg1=bot.send_message(id1, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)  
-    msg2=bot.send_message(id2, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)
+  t=threading.Timer(60, noready, args=[ids['id1'], ids['id2'], ids])
+  t.start()
+  zz=threading.Timer(60, noready, args=[ids['id2'],ids['id1'], ids])
+  zz.start()
+  ids['id1']['timer']=t
+  ids['id2']['timer']=zz
+  Keyboard=types.InlineKeyboardMarkup()
+  Keyboard.add(types.InlineKeyboardButton(text='+1', callback_data='atk+1'))
+  Keyboard.add(types.InlineKeyboardButton(text='+2', callback_data='atk+2'))
+  Keyboard.add(types.InlineKeyboardButton(text='+5', callback_data='atk+5'))
+  Keyboard.add(types.InlineKeyboardButton(text='+10', callback_data='atk+10'))
+  Keyboard.add(types.InlineKeyboardButton(text='Окончить выбор', callback_data='endattack'))
+  msg1=bot.send_message(id1, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)  
+  msg2=bot.send_message(id2, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)
     
 
 def ready(ids, id2, game): 
