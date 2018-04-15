@@ -486,13 +486,17 @@ def endturn(game):############################################################# 
     player1['attackround']=0
     player1['defenceround']=0
     player1['ready']=0
-    player1['attack']+=player1['attackregen']
-    player1['defence']+=player1['defenceregen']
+    if player1['attack']<player1['attackregen']:
+        player1['attack']+=player1['attackregen']
+    if player1['defence']<player1['defenceregen']
+        player1['defence']+=player1['defenceregen']
     player2['attackround']=0
     player2['defenceround']=0
     player2['ready']=0
-    player2['attack']+=player2['attackregen']
-    player2['defence']+=player2['defenceregen']
+    if player2['attack']<player2['attackregen']:
+        player2['attack']+=player2['attackregen']
+    if player2['defence']<player2['defenceregen']
+        player2['defence']+=player2['defenceregen']
     
     if player1['hp']<=0 and player2['hp']>0:
         bot.send_message(player1['id'], 'Победа питомца с именем '+player2['name']+'!')
