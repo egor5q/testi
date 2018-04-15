@@ -421,17 +421,17 @@ def xod(id1, id2, name1, name2, player1, player2):
                      '🔺Скилл: '+skill2       
                     )
     bot.send_message(441399484 , 'Информация о вашем питомце:\n'+'❤️ХП: '+str(player1['pet']['hp'])+
-                     '\n⚔️Атака: '+str(player1['pet']['attack'])+'/'+str(player1['pet']['maxattack'])+'\n'+
-                     '⚡️Реген атаки: '+str(player1['pet']['regenattack'])+'\n'+
-                    '🛡Защита: '+str(player1['pet']['defence'])+'/'+str(player1['pet']['maxdefence'])+'\n'+
-                     '🔵Реген защиты: '+str(player1['pet']['regendefence'])+'\n'+
+                     '\n⚔️Атака: '+str(player1['attack'])+'/'+str(player1['maxattack'])+'\n'+
+                     '⚡️Реген атаки: '+str(player1['regenattack'])+'\n'+
+                    '🛡Защита: '+str(player1['defence'])+'/'+str(player1['maxdefence'])+'\n'+
+                     '🔵Реген защиты: '+str(player1['regendefence'])+'\n'+
                      '🔺Скилл: '+skill1       
                     )
     bot.send_message(441399484 , 'Информация о вашем питомце:\n'+'❤️ХП: '+str(player2['pet']['hp'])+
-                     '\n⚔️Атака: '+str(player2['pet']['attack'])+'/'+str(player2['pet']['maxattack'])+'\n'+
-                     '⚡️Реген атаки: '+str(player2['pet']['regenattack'])+'\n'+
-                    '🛡Защита: '+str(player2['pet']['defence'])+'/'+str(player2['pet']['maxdefence'])+'\n'+
-                     '🔵Реген защиты: '+str(player2['pet']['regendefence'])+'\n'+
+                     '\n⚔️Атака: '+str(player2['attack'])+'/'+str(player2['maxattack'])+'\n'+
+                     '⚡️Реген атаки: '+str(player2['regenattack'])+'\n'+
+                    '🛡Защита: '+str(player2['defence'])+'/'+str(player2['maxdefence'])+'\n'+
+                     '🔵Реген защиты: '+str(player2['regendefence'])+'\n'+
                      '🔺Скилл: '+skill2   
                     )
     
