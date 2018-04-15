@@ -497,14 +497,15 @@ def endturn(game):############################################################# 
         player2['attack']+=player2['attackregen']
     if player2['defence']<player2['maxdefence']:
         player2['defence']+=player2['defenceregen']
-    
     if player1['hp']<=0 and player2['hp']>0:
         bot.send_message(player1['id'], 'Победа питомца с именем '+player2['name']+'!')
         bot.send_message(player2['id'], 'Победа питомца с именем '+player2['name']+'!')
+        iduser.update_one({'id':player2['id']}, {'$inc':{'pet.wons':1}})
         play.remove(game)
     elif player2['hp']<=0 and player1['hp']>0: 
         bot.send_message(player1['id'], 'Победа питомца с именем '+player1['name']+'!')
         bot.send_message(player2['id'], 'Победа питомца с именем '+player1['name']+'!')
+        iduser.update_one({'id':player1['id']}, {'$inc':{'pet.wons':1}})
         play.remove(game)
     elif player1['hp']<=0 and player2['hp']<=0:
         bot.send_message(player1['id'], 'Ничья! Оба питомца проиграли!')
@@ -678,7 +679,8 @@ def petcreate():
         'regendefence':1,
         'skill':None,
         'exp':0,
-        'wons':0
+        'wons':0,
+        'lose':0
     }
     
     
