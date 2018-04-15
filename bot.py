@@ -50,7 +50,11 @@ def sendmes(message):
 @bot.message_handler(commands=['stats'])
 def stats(m):
     x=iduser.find_one({'id':m.from_user.id})
-    bot.send_message(m.chat.id, 'Победы: '+str(x['pet']['wons'])+'\nПоражения: '+str(x['pet']['lose'])+'\nВинрейт: '+str(round(x['pet']['wons']/x['pet']['lose'],0))+'%')
+    try:
+        percent=round((x['pet']['wons']/x['pet']['lose'])*100,0)
+    except:
+        percent=100
+    bot.send_message(m.chat.id, 'Победы: '+str(x['pet']['wons'])+'\nПоражения: '+str(x['pet']['lose'])+'\nВинрейт: '+percent+'%')
             
             
             
