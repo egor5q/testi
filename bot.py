@@ -374,6 +374,8 @@ def gofight(id1, id2, name1, name2):
     play.append(creategame(id1, id2, player1, player2))
     bot.send_message(id1, 'Битва начинается! Ваш питомец дерётся с питомцем, которого зовут '+'"'+name2+'"'+'! Его уровень: '+str(player2['pet']['level']))
     bot.send_message(id2, 'Битва начинается! Ваш питомец дерётся с питомцем, которого зовут '+'"'+name1+'"'+'! Его уровень: '+str(player1['pet']['level']))
+    bot.send_message(441399484, 'Битва начинается! Ваш питомец дерётся с питомцем, которого зовут '+'"'+name2+'"'+'! Его уровень: '+str(player2['pet']['level']))
+    bot.send_message(441399484, 'Битва начинается! Ваш питомец дерётся с питомцем, которого зовут '+'"'+name1+'"'+'! Его уровень: '+str(player1['pet']['level']))
     xod(id1, id2, name1, name2, player1, player2)
     
     
@@ -510,16 +512,19 @@ def endturn(game):############################################################# 
     if player1['hp']<=0 and player2['hp']>0:
         bot.send_message(player1['id'], 'Победа питомца с именем '+player2['name']+'!')
         bot.send_message(player2['id'], 'Победа питомца с именем '+player2['name']+'!')
+        bot.send_message(441399484, 'Победа питомца с именем '+player2['name']+'!')
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.wons':1}})
         play.remove(game)
     elif player2['hp']<=0 and player1['hp']>0: 
         bot.send_message(player1['id'], 'Победа питомца с именем '+player1['name']+'!')
         bot.send_message(player2['id'], 'Победа питомца с именем '+player1['name']+'!')
+        bot.send_message(441399484, 'Победа питомца с именем '+player1['name']+'!')
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.wons':1}})
         play.remove(game)
     elif player1['hp']<=0 and player2['hp']<=0:
         bot.send_message(player1['id'], 'Ничья! Оба питомца проиграли!')
         bot.send_message(player2['id'], 'Ничья! Оба питомца проиграли!')
+        bot.send_message(441399484, 'Ничья! Оба питомца проиграли!')
         play.remove(game)
     else:
         xod(player1['id'], player2['id'], player1['name'], player2['name'], game['id1'], game['id2'])
