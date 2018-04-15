@@ -486,16 +486,16 @@ def endturn(game):############################################################# 
     player1['attackround']=0
     player1['defenceround']=0
     player1['ready']=0
-    if player1['attack']<player1['attackregen']:
+    if player1['attack']<player1['maxattack']:
         player1['attack']+=player1['attackregen']
-    if player1['defence']<player1['defenceregen']:
+    if player1['defence']<player1['maxdefence']:
         player1['defence']+=player1['defenceregen']
     player2['attackround']=0
     player2['defenceround']=0
     player2['ready']=0
-    if player2['attack']<player2['attackregen']:
+    if player2['attack']<player2['maxattack']:
         player2['attack']+=player2['attackregen']
-    if player2['defence']<player2['defenceregen']:
+    if player2['defence']<player2['maxdefence']:
         player2['defence']+=player2['defenceregen']
     
     if player1['hp']<=0 and player2['hp']>0:
