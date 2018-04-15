@@ -187,6 +187,15 @@ def fight(m):
       if z!=None:
         if z['pet']!=None:
           if z['pet']['name']!=None:
+           x=0
+           for ids in play:
+             if ids['id1']['id']==user:
+                x=1
+                y=ids['id1']
+             if ids['id2']['id']==user:
+                x=1
+                y=ids['id2']
+           if x==0:
             t=threading.Timer(300, noplayers, args=[m.from_user.id])
             t.start()
             bot.send_message(m.chat.id, 'Вы встали в очередь на поединок питомцев! Ожидайте игроков...')
