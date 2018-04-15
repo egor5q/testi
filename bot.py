@@ -51,7 +51,7 @@ def sendmes(message):
 def stats(m):
     x=iduser.find_one({'id':m.from_user.id})
     try:
-        percent=round((x['pet']['wons']/x['pet']['lose'])*100,0)
+        percent=round((x['pet']['wons']/(x['pet']['lose']+x['pet']['wons']))*100,0)
     except:
         if x['pet']['wons']!=0:
             percent=100
