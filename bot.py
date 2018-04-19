@@ -47,6 +47,12 @@ def sendmes(message):
                 pass
 
 
+@bot.message_handler(commands=['mypet'])
+def mypet(m):
+    x=iduser.find_one({'id':m.from_user.id})
+    
+            
+            
 @bot.message_handler(commands=['stats'])
 def stats(m):
     x=iduser.find_one({'id':m.from_user.id})
