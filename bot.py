@@ -448,8 +448,8 @@ def xod(id1, id2, name1, name2, player1, player2):
   Keyboard.add(types.InlineKeyboardButton(text='Окончить выбор', callback_data='endattack'))
   msg1=bot.send_message(id1, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)  
   msg2=bot.send_message(id2, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)
-  id1['message']=msg1.message_id
-  id2['message']=msg2.message_id
+  ids['id1']['message']=msg1.message_id
+  ids['id2']['message']=msg2.message_id
     
 
 def ready(ids, id2, game): 
