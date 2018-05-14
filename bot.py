@@ -448,6 +448,8 @@ def xod(id1, id2, name1, name2, player1, player2):
   Keyboard.add(types.InlineKeyboardButton(text='Окончить выбор', callback_data='endattack'))
   msg1=bot.send_message(id1, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)  
   msg2=bot.send_message(id2, 'Теперь выставьте количество атаки, которое хотите поставить в этом ходу. Текущая атака: 0', reply_markup=Keyboard)
+  id1['message']=msg1.message_id
+  id2['message']=msg2.message_id
     
 
 def ready(ids, id2, game): 
@@ -459,6 +461,7 @@ def ready(ids, id2, game):
 def noready(ids, id2, game):
     ids['ready']=1
     if ids['ready']==1 and id2['ready']==1:
+        medit('Время вышло!', ids['id'], ids['message'])
         endturn(game)
                 
 
@@ -607,7 +610,8 @@ def creategame(id1, id2, player1, player2):
                        'hp':player1['pet']['hp'],
                        'attackregen':player1['pet']['regenattack'],
                        'defenceregen':player1['pet']['regendefence'],
-                       'skill':player1['pet']['skill']
+                       'skill':player1['pet']['skill'],
+                       'message':None
                       },
                 'id2':{
                     'timer':None,
@@ -626,6 +630,7 @@ def creategame(id1, id2, player1, player2):
                     'attackregen':player2['pet']['regenattack'],
                     'defenceregen':player2['pet']['regendefence'],
                     'skill':player2['pet']['skill']
+                    'message':None
                      }
             }
 
