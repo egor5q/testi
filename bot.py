@@ -140,12 +140,6 @@ def info(message):
             people+=1
         bot.send_message(message.from_user.id, 'Группы: '+str(group)+'\n'+'Люди: '+str(people))
         
-
-
-   
-@bot.message_handler(commands=['ti_ctochlen'])
-def ticto(message):
-    bot.send_message(message.from_user.id, 'Умеет менять размер члинуса')
                      
         
 @bot.message_handler(commands=['name'])
@@ -460,8 +454,8 @@ def ready(ids, id2, game):
 
 def noready(ids, id2, game):
     ids['ready']=1
+    medit('Время вышло!', ids['id'], ids['message'])
     if ids['ready']==1 and id2['ready']==1:
-        medit('Время вышло!', ids['id'], ids['message'])
         endturn(game)
                 
 
