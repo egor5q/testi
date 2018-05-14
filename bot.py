@@ -130,7 +130,10 @@ def channel(message):
 
 @bot.message_handler(commands=['start'])
 def startms(message):
-    bot.send_message(message.from_user.id, 'Это бот для сражений питомцев Членомера! Подробнее - /pethelp')
+    try:
+        bot.send_message(message.from_user.id, 'Это бот для сражений питомцев Членомера! Подробнее - /pethelp')
+    except:
+        pass
 
 
 @bot.message_handler(commands=['info'])
