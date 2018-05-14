@@ -589,7 +589,44 @@ def petcreate():
     
     
 
-
+def creategame(id1, id2, player1, player2):
+             return{
+                'id1':{'id':id1,
+                       'timer':None,
+                       'attackselect':0,
+                       'defenceselect':0,
+                       'maxattack':player1['pet']['maxattack'],
+                       'maxdefence':player1['pet']['maxdefence'],
+                       'attack':player1['pet']['maxattack'],
+                       'defence':player1['pet']['maxdefence'],
+                       'attackround':0,
+                       'defenceround':0,
+                       'ready':0,
+                       'name':player1['pet']['name'],
+                       'hp':player1['pet']['hp'],
+                       'attackregen':player1['pet']['regenattack'],
+                       'defenceregen':player1['pet']['regendefence'],
+                       'skill':player1['pet']['skill']
+                      },
+                'id2':{
+                    'timer':None,
+                    'id':id2,
+                    'attackselect':0,
+                    'defenceselect':0,
+                    'maxattack':player2['pet']['maxattack'],
+                    'maxdefence':player2['pet']['maxdefence'],
+                    'attack':player2['pet']['maxattack'],
+                    'defence':player2['pet']['maxdefence'],
+                    'attackround':0,
+                    'defenceround':0,
+                    'ready':0,
+                    'name':player2['pet']['name'],
+                    'hp':player2['pet']['hp'],
+                    'attackregen':player2['pet']['regenattack'],
+                    'defenceregen':player2['pet']['regendefence'],
+                    'skill':player2['pet']['skill']
+                     }
+            }
 
 
     
