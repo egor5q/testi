@@ -318,7 +318,7 @@ def inline(call):
                     call.from_user.id,
                     call.message.message_id, reply_markup=Keyboard)
                 else:
-                    bot.send_message(user, 'У вас недостаточно защиты!')
+                    bot.answer_callback_query(call.id, 'У вас недостаточно защиты!')
             else:
                 bot.send_message(user, 'Нет!')
                     
