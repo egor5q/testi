@@ -519,15 +519,26 @@ def endturn(game):############################################################# 
         play.remove(game)
     elif player2['hp']<=0 and player1['hp']>0: 
         try:
-        bot.send_message(player1['id'], 'Победа питомца с именем '+player1['name']+'!')
-        bot.send_message(player2['id'], 'Победа питомца с именем '+player1['name']+'!')
+            bot.send_message(player1['id'], 'Победа питомца с именем '+player1['name']+'!')
+        except:
+            pass
+        try:
+            bot.send_message(player2['id'], 'Победа питомца с именем '+player1['name']+'!')
+        except:
+            pass
         bot.send_message(441399484, 'Победа питомца с именем '+player1['name']+'!')
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.wons':1}})
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.lose':1}})
         play.remove(game)
     elif player1['hp']<=0 and player2['hp']<=0:
-        bot.send_message(player1['id'], 'Ничья! Оба питомца проиграли!')
-        bot.send_message(player2['id'], 'Ничья! Оба питомца проиграли!')
+        try:
+            bot.send_message(player1['id'], 'Ничья! Оба питомца проиграли!')
+        except:
+            pass
+        try:
+            bot.send_message(player2['id'], 'Ничья! Оба питомца проиграли!')
+            except:
+                pass
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.lose':1}})
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.lose':1}})
         bot.send_message(441399484, 'Ничья! Оба питомца проиграли!')
