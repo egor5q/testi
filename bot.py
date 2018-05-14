@@ -629,7 +629,7 @@ def creategame(id1, id2, player1, player2):
                     'hp':player2['pet']['hp'],
                     'attackregen':player2['pet']['regenattack'],
                     'defenceregen':player2['pet']['regendefence'],
-                    'skill':player2['pet']['skill']
+                    'skill':player2['pet']['skill'],
                     'message':None
                      }
             }
