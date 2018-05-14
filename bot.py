@@ -537,7 +537,7 @@ def endturn(game):############################################################# 
             pass
         try:
             bot.send_message(player2['id'], 'Ничья! Оба питомца проиграли!')
-            except:
+        except:
                 pass
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.lose':1}})
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.lose':1}})
