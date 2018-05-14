@@ -48,9 +48,6 @@ def sendmes(message):
                 pass
 
 
-@bot.message_handler(commands=['mypet'])
-def mypet(m):
-    x=iduser.find_one({'id':m.from_user.id})
     
             
             
@@ -65,8 +62,10 @@ def stats(m):
                 percent=100
             else:
                 percent=0
-        bot.send_message(m.chat.id, 'Победы: '+str(x['pet']['wons'])+'\nПоражения: '+str(x['pet']['lose'])+'\nВинрейт: '+str(percent)+'%')
-            
+        try:
+            bot.send_message(m.chat.id, 'Победы: '+str(x['pet']['wons'])+'\nПоражения: '+str(x['pet']['lose'])+'\nВинрейт: '+str(percent)+'%')
+        except:
+            pass
             
             
             
@@ -112,15 +111,21 @@ def mme(m):
      bot.send_message(m.chat.id, m.from_user.first_name+', Ваши членокоины: '+str(x['chlenocoins'])+'. Сейчас они не нужны, но следите за обновлениями - в будущем они понадобятся!')
      bot.send_message(441399484, m.from_user.first_name+', Ваши членокоины: '+str(x['chlenocoins'])+'. Сейчас они не нужны, но следите за обновлениями - в будущем они понадобятся!')                                                                                                                                     
     except:
+      try:
         bot.send_message(m.chat.id, 'Упс! Какая-то ошибка! Наверное, вы ни разу не измеряли член! (напишите боту "член")')
-        bot.send_message(441399484, 'Упс! Какая-то ошибка! Наверное, вы ни рару не измеряли член!')                                                                                                                               
+        bot.send_message(441399484, 'Упс! Какая-то ошибка! Наверное, вы ни рару не измеряли член!')  
+      except:
+        pass
                                                                  
         
           
                 
 @bot.message_handler(commands=['channel'])
 def channel(message):
+  try:
     bot.send_message(message.chat.id, 'Канал обновлений: @chlenomer')
+  except:
+    pass
                      
 
 @bot.message_handler(commands=['start'])
@@ -139,7 +144,10 @@ def info(message):
         y=iduser.find({})
         for element in y:
             people+=1
-        bot.send_message(message.from_user.id, 'Группы: '+str(group)+'\n'+'Люди: '+str(people))
+        try:
+            bot.send_message(message.from_user.id, 'Группы: '+str(group)+'\n'+'Люди: '+str(people))
+        except:
+            pass
         
                      
         
@@ -185,7 +193,10 @@ def fight(m):
            if x==0:
             t=threading.Timer(300, noplayers, args=[m.from_user.id])
             t.start()
-            bot.send_message(m.chat.id, 'Вы встали в очередь на поединок питомцев! Ожидайте игроков...')
+            try:
+                bot.send_message(m.chat.id, 'Вы встали в очередь на поединок питомцев! Ожидайте игроков...')
+            except:
+                pass
             wait.append(m.from_user.id)
             player=iduser.find_one({'id':m.from_user.id})
             for id in wait:
@@ -204,14 +215,25 @@ def fight(m):
                             pass
                         gofight(player['id'], x['id'], name1, name2)                
           else:
-            bot.send_message(m.from_user.id, 'Сначала дайте питомцу имя! (команда /name)') 
+            try:
+                bot.send_message(m.from_user.id, 'Сначала дайте питомцу имя! (команда /name)') 
+            except:
+                pass
         else:
-            bot.send_message(m.from_user.id, 'У вас нет питомца!')
+            try:
+                bot.send_message(m.from_user.id, 'У вас нет питомца!')
+            except:
+                pass
       else:
-        bot.send_message(m.from_user.id, 'Сначала напишите боту "член"!')
+        try:
+            bot.send_message(m.from_user.id, 'Сначала напишите боту "член"!')
+        except:
+            pass
     else:
+      try:
        bot.send_message(m.from_user.id, 'Эту команду можно использовать только в личных сообщениях бота!') 
-                
+      except:
+            pass
 
 @bot.message_handler(commands=['cancel'])
 def cancel(m):
