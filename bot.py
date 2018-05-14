@@ -279,7 +279,7 @@ def inline(call):
                     call.from_user.id,
                     call.message.message_id, reply_markup=Keyboard)
                 else:
-                    bot.answer_callback_query(user, 'У вас недостаточно атаки!')
+                    bot.answer_callback_query(call.id, 'У вас недостаточно атаки!')
             else:
                 bot.send_message(user, 'Нет!')
                 
