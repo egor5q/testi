@@ -57,14 +57,15 @@ def mypet(m):
 @bot.message_handler(commands=['stats'])
 def stats(m):
     x=iduser.find_one({'id':m.from_user.id})
-    try:
-        percent=round((x['pet']['wons']/(x['pet']['lose']+x['pet']['wons']))*100,0)
-    except:
-        if x['pet']['wons']!=0:
-            percent=100
-        else:
-            percent=0
-    bot.send_message(m.chat.id, 'Победы: '+str(x['pet']['wons'])+'\nПоражения: '+str(x['pet']['lose'])+'\nВинрейт: '+str(percent)+'%')
+    if x!=None:
+        try:
+            percent=round((x['pet']['wons']/(x['pet']['lose']+x['pet']['wons']))*100,0)
+        except:
+            if x['pet']['wons']!=0:
+                percent=100
+            else:
+                percent=0
+        bot.send_message(m.chat.id, 'Победы: '+str(x['pet']['wons'])+'\nПоражения: '+str(x['pet']['lose'])+'\nВинрейт: '+str(percent)+'%')
             
             
             
@@ -481,9 +482,14 @@ def endturn(game):############################################################# 
     player2['hp']-=losehp2
     text2+='*'+player2['name']+'*:\n'+'Выставленная атака: '+str(player2['attackround'])+'\nВыставленная защита: '+str(player2['defenceround'])+'\nПолученный урон: '+str(losehp2)
         
-        
-    bot.send_message(player1['id'], 'Результаты хода:\n\n'+text1+'\n'+'\n'+text2, parse_mode='markdown')
-    bot.send_message(player2['id'], 'Результаты хода:\n\n'+text1+'\n'+'\n'+text2, parse_mode='markdown')
+    try:    
+        bot.send_message(player1['id'], 'Результаты хода:\n\n'+text1+'\n'+'\n'+text2, parse_mode='markdown')
+    except:
+        pass
+    try:
+        bot.send_message(player2['id'], 'Результаты хода:\n\n'+text1+'\n'+'\n'+text2, parse_mode='markdown')
+    except:
+        pass
     player1['attackround']=0
     player1['defenceround']=0
     player1['ready']=0
@@ -499,13 +505,20 @@ def endturn(game):############################################################# 
     if player2['defence']<player2['maxdefence']:
         player2['defence']+=player2['defenceregen']
     if player1['hp']<=0 and player2['hp']>0:
-        bot.send_message(player1['id'], 'Победа питомца с именем '+player2['name']+'!')
-        bot.send_message(player2['id'], 'Победа питомца с именем '+player2['name']+'!')
+        try:
+            bot.send_message(player1['id'], 'Победа питомца с именем '+player2['name']+'!')
+        except:
+            pass
+        try:
+            bot.send_message(player2['id'], 'Победа питомца с именем '+player2['name']+'!')
+        except:
+            pass
         bot.send_message(441399484, 'Победа питомца с именем '+player2['name']+'!')
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.wons':1}})
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.lose':1}})
         play.remove(game)
     elif player2['hp']<=0 and player1['hp']>0: 
+        try:
         bot.send_message(player1['id'], 'Победа питомца с именем '+player1['name']+'!')
         bot.send_message(player2['id'], 'Победа питомца с именем '+player1['name']+'!')
         bot.send_message(441399484, 'Победа питомца с именем '+player1['name']+'!')
