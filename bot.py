@@ -81,20 +81,22 @@ def elit(m):
         bot.send_message(m.from_user.id, 'Вы элита!', reply_markup=Kb)
     
     
-#@bot.message_handler(commands=['update'])
-#def upd(m):
-#  if m.from_user.id==441399484:
-#         try:
-#            iduser.update_many({}, {'$set':{'boosters':boostercreate()}})
-#            print('yes')
+@bot.message_handler(commands=['update'])
+def upd(m):
+  if m.from_user.id==441399484:
+         try:
+            iduser.update_many({}, {'$set':{'boosters':boostercreate()}})
+            print('yes')
 
-#         except:
-#            pass
+         except:
+            pass
             
 
-#def boostercreate():
-#    return {'sharpchlen':0          
-#    }
+def boostercreate():
+    return {'sharpchlen':0,
+            'wings':0
+            
+    }
             
 @bot.message_handler(commands=['mysize'])
 def size(m):
@@ -372,6 +374,10 @@ def inline(call):
             y['timer'].cancel()
             y['ready']=1
             ready(y, z, ids)
+            
+            
+    #if call.data=='sharpchlen':
+    #    x=iduser.find_one({'id':call.from_user.id})
 
 
             
@@ -537,6 +543,9 @@ def endturn(game):############################################################# 
         player2['attack']+=player2['attackregen']
     if player2['defence']<player2['maxdefence']:
         player2['defence']+=player2['defenceregen']
+    expwin=random.randint(50,100)
+    exploose=random.randint(5,25)
+    endgame=0
     if player1['hp']<=0 and player2['hp']>0:
         try:
             bot.send_message(player1['id'], 'Победа питомца с именем '+player2['name']+'!')
@@ -548,7 +557,10 @@ def endturn(game):############################################################# 
             pass
         bot.send_message(441399484, 'Победа питомца с именем '+player2['name']+'!')
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.wons':1}})
+        iduser.update_one({'id':player2['id']}, {'$inc':{'pet.exp':expwin}})
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.lose':1}})
+        iduser.update_one({'id':player1['id']}, {'$inc':{'pet.exp':exploose}})
+        endgame=1
         play.remove(game)
     elif player2['hp']<=0 and player1['hp']>0: 
         try:
@@ -561,7 +573,10 @@ def endturn(game):############################################################# 
             pass
         bot.send_message(441399484, 'Победа питомца с именем '+player1['name']+'!')
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.wons':1}})
+        iduser.update_one({'id':player1['id']}, {'$inc':{'pet.exp':expwin}})
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.lose':1}})
+        iduser.update_one({'id':player2['id']}, {'$inc':{'pet.exp':exploose}})
+        endgame=1
         play.remove(game)
     elif player1['hp']<=0 and player2['hp']<=0:
         try:
@@ -574,8 +589,13 @@ def endturn(game):############################################################# 
                 pass
         iduser.update_one({'id':player2['id']}, {'$inc':{'pet.lose':1}})
         iduser.update_one({'id':player1['id']}, {'$inc':{'pet.lose':1}})
+        iduser.update_one({'id':player2['id']}, {'$inc':{'pet.exp':exploose}})
+        iduser.update_one({'id':player1['id']}, {'$inc':{'pet.exp':exploose}})
+        endgame=1
         bot.send_message(441399484, 'Ничья! Оба питомца проиграли!')
         play.remove(game)
+    if endgame==1:
+        pass
     else:
         xod(player1['id'], player2['id'], player1['name'], player2['name'], game['id1'], game['id2'])
         
@@ -604,8 +624,19 @@ def buypet(m):
         bot.send_message(m.chat.id, 'Сначала напишите боту "член" хотя бы раз!')
         
 
-        
-        
+#@bot.message_handler(commands=['upgrade'])
+#def upg(m):
+#  if m.from_user.id==m.chat.id:
+#    kb=types.InlineKeyboardMarkup()
+#    kb.add(types.InlineKeyboardButton(text='Острый член', callback_data='infosharpchlen'),types.InlineKeyboardButton(text='6💰', callback_data='sharpchlen'))
+#    kb.add(types.InlineKeyboardButton(text='Крылья', callback_data='infowings'), types.InlineKeyboardButton(text='3💰', callback_data='wings'))
+#    bot.send_message(m.from_user.id, 'Чтобы купить предмет, нажмите на его стоимость. Чтобы узнать информацию о нём, нажмите на его название.')    
+#  else:
+#    bot.send_message(m.chat.id, 'Меню покупок можно вызывать только в личных сообщениях!')
+ 
+
+
+
 @bot.message_handler(commands=['pethelp'])
 def pethelp(m):
     bot.send_message(m.chat.id, 'Питомец вам нужен для участия в боях. Чтобы поучаствовать, нужно написать боту в личные сообщения команду /fight.\n'+
