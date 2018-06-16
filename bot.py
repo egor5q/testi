@@ -204,7 +204,7 @@ def fight(m):
                 x=1
                 y=ids['id2']
            if x==0:
-            t=threading.Timer(300, noplayers, args=[m.from_user.id])
+            t=threading.Timer(3600, noplayers, args=[m.from_user.id])
             t.start()
             try:
                 bot.send_message(m.chat.id, 'Вы встали в очередь на поединок питомцев! Ожидайте игроков...')
@@ -603,7 +603,7 @@ def endturn(game):############################################################# 
 def noplayers(id):
     try:
         wait.remove(id)
-        bot.send_message(id, 'Вы ожидали оппонента 5 минут и были удалены из очереди! Попробуйте позже, когда будут ещё бойцы.')
+        bot.send_message(id, 'Вы ожидали оппонента 60 минут и были удалены из очереди! Попробуйте позже, когда будут ещё бойцы.')
     except:
         pass
         
