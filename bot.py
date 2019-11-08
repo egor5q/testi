@@ -723,13 +723,6 @@ def creategame(id1, id2, player1, player2):
         
                          
 
+bot.polling(none_stop=True)
 
-
-while True:
-    from requests.exceptions import ReadTimeout
-    from requests.exceptions import ConnectionError
-    try:
-        bot.polling()
-    except(ReadTimeout, ConnectionError):
-        pass
 
